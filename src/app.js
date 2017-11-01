@@ -1,7 +1,4 @@
-console.log('App.js is running');
-
 // JSX - JavaScript XML //
-
 const app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of a computer.',
@@ -22,7 +19,7 @@ const onFormSubmit = (e) => {
 const removeAllButton = () => {
   app.options = [];
   renderNewApp();
-}
+};
 
 const onMakeDecision = () => {
   const randomNum = Math.floor(Math.random() * app.options.length);
@@ -31,8 +28,6 @@ const onMakeDecision = () => {
 };
 
 const appRoot = document.getElementById('app');
-
-const numbers = [55, 101, 1000];
 
 const renderNewApp = () => {
   const template = (
@@ -57,6 +52,6 @@ const renderNewApp = () => {
   );
 
   ReactDOM.render(template, appRoot);
-}
+};
 
 renderNewApp();

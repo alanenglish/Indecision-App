@@ -1,9 +1,6 @@
 'use strict';
 
-console.log('App.js is running');
-
 // JSX - JavaScript XML //
-
 var app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of a computer.',
@@ -33,8 +30,6 @@ var onMakeDecision = function onMakeDecision() {
 };
 
 var appRoot = document.getElementById('app');
-
-var numbers = [55, 101, 1000];
 
 var renderNewApp = function renderNewApp() {
   var template = React.createElement(
