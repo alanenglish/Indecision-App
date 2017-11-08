@@ -7,7 +7,7 @@ class IndecisionApp extends React.Component {
     this.handleAddOption = this.handleAddOption.bind(this);
     this.handleDeleteOption = this.handleDeleteOption.bind(this);
     this.state = {
-      options: props.options
+      options: [] // props.options
     }
   }
 
@@ -101,9 +101,11 @@ class IndecisionApp extends React.Component {
   }
 }
 
-IndecisionApp.defaultProps = {
-  options: []
-}
+// now that we are reading data from localStorage it doesn't make sense to allow user
+// to pass a prop in anymore.
+// IndecisionApp.defaultProps = {
+//   options: []
+// }
 
 const Header = (props) => {
   return (
