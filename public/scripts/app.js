@@ -26,7 +26,51 @@ var IndecisionApp = function (_React$Component) {
     return _this;
   }
 
+  // JSON.stringify - take regular JavaScript object and get the string representation
+  // JSON.parse - take string representation and get true JavaScript object
+
+  // lifecycle methods only available in class components
+
+
   _createClass(IndecisionApp, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // fires when component first gets mounted to DOM
+      try {
+        var json = localStorage.getItem('options');
+        var options = JSON.parse(json);
+
+        if (options) {
+          this.setState(function () {
+            return { options: options };
+          });
+        }
+      } catch (e) {
+        // do nothing at all if errors
+      }
+
+      console.log('componentDidMount - fetching data');
+    }
+
+    // prevProps and prevState arguments available
+
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      // fires after component updates, state or prop values change
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+        console.log('componentDidUpdate - saving data');
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      // fires just before component goes away
+      console.log('componentWillUnmount');
+    }
+  }, {
     key: 'handleDeleteOptions',
     value: function handleDeleteOptions() {
       this.setState(function () {
@@ -150,6 +194,11 @@ var Options = function Options(props) {
       { onClick: props.handleDeleteOptions },
       'Remove All'
     ),
+    props.options.length === 0 && React.createElement(
+      'p',
+      null,
+      'Please add an option to get started.'
+    ),
     props.options.map(function (option) {
       return React.createElement(Option, {
         key: option,
@@ -208,7 +257,9 @@ var AddOption = function (_React$Component2) {
       //   }
       // })
 
-      e.target.elements.option.value = '';
+      if (!error) {
+        e.target.elements.option.value = '';
+      }
     }
   }, {
     key: 'render',

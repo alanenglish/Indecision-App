@@ -11,6 +11,38 @@ class IndecisionApp extends React.Component {
     }
   }
 
+  // JSON.stringify - take regular JavaScript object and get the string representation
+  // JSON.parse - take string representation and get true JavaScript object
+
+  // lifecycle methods only available in class components
+  componentDidMount() { // fires when component first gets mounted to DOM
+    try {
+      const json = localStorage.getItem('options');
+      const options = JSON.parse(json);
+
+      if (options) {
+        this.setState(() => ({ options }));
+      }
+    } catch (e) {
+      // do nothing at all if errors
+    }
+
+    console.log('componentDidMount - fetching data');
+  }
+
+  // prevProps and prevState arguments available
+  componentDidUpdate(prevProps, prevState) { // fires after component updates, state or prop values change
+    if (prevState.options.length !== this.state.options.length) {
+      const json = JSON.stringify(this.state.options);
+      localStorage.setItem('options', json);
+      console.log('componentDidUpdate - saving data');
+    }
+  }
+
+  componentWillUnmount() { // fires just before component goes away
+    console.log('componentWillUnmount');
+  }
+
   handleDeleteOptions() {
     this.setState(() => ({ options: [] }));
     // this.setState(() => {
@@ -103,6 +135,7 @@ const Options = (props) => {
   return (
     <div>
       <button onClick={props.handleDeleteOptions}>Remove All</button>
+      {props.options.length === 0 && <p>Please add an option to get started.</p>}
       {
         props.options.map((option) => (
           <Option
@@ -153,7 +186,10 @@ class AddOption extends React.Component {
     //   }
     // })
 
-    e.target.elements.option.value = '';
+    if (!error) {
+      e.target.elements.option.value = '';
+    }
+
   }
 
   render() {
