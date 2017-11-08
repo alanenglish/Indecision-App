@@ -29,10 +29,13 @@ var IndecisionApp = function (_React$Component) {
     key: 'handleDeleteOptions',
     value: function handleDeleteOptions() {
       this.setState(function () {
-        return {
-          options: []
-        };
+        return { options: [] };
       });
+      // this.setState(() => {
+      //   return {
+      //     options: []
+      //   };
+      // });
     }
   }, {
     key: 'handlePick',
@@ -49,12 +52,14 @@ var IndecisionApp = function (_React$Component) {
       } else if (this.state.options.indexOf(option) > -1) {
         return 'This option already exists';
       }
-
       this.setState(function (prevState) {
-        return {
-          options: prevState.options.concat(option)
-        };
+        return { options: prevState.options.concat(option) };
       });
+      // this.setState((prevState) => {
+      //   return {
+      //     options: prevState.options.concat(option)
+      //   }
+      // })
     }
   }, {
     key: 'render',
@@ -169,10 +174,13 @@ var AddOption = function (_React$Component2) {
       var error = this.props.handleAddOption(option);
 
       this.setState(function () {
-        return {
-          error: error
-        };
+        return { error: error };
       });
+      // this.setState(() => {
+      //   return {
+      //     error: error
+      //   }
+      // })
 
       e.target.elements.option.value = '';
     }
@@ -205,3 +213,5 @@ var AddOption = function (_React$Component2) {
 }(React.Component);
 
 ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
+
+// babel src/app.js --out-file=public/scripts/app.js --presets=env,react --watch
