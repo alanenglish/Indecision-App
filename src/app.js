@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AddOption from './components/AddOption';
 import Option from './components/Option';
 import Options from './components/Options';
+import Action from './components/Action';
 
 class IndecisionApp extends React.Component {
   constructor(props) {
@@ -124,19 +125,6 @@ const Header = (props) => {
 
 Header.defaultProps = {
   title: 'Indecision'
-}
-
-const Action = (props) => {
-  return (
-    <div>
-      <button
-        onClick={props.handlePick}
-        disabled={!props.hasOptions}
-        >
-          What should I do?
-        </button>
-    </div>
-  );
 }
 
 ReactDOM.render(<IndecisionApp />, document.getElementById('app'));
