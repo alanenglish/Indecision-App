@@ -7,8 +7,23 @@ class Counter extends React.Component {
     this.handleResetCount = this.handleResetCount.bind(this);
 
     this.state = {
-      count: props.count
+      count: 0 // props.count
     };
+  }
+
+  componentDidMount() {
+    const stringCount = localStorage.getItem('count');
+    const count = parseInt(stringCount, 10);
+
+    if (!isNaN(count)) {
+      this.setState({ count });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState !== this.state.count) {
+      localStorage.setItem('count', this.state.count);
+    }
   }
 
   handleAddOne() {
@@ -45,8 +60,11 @@ class Counter extends React.Component {
   }
 }
 
-Counter.defaultProps = {
-  count: 0
-}
+
+// now that we are reading data from localStorage it doesn't make sense to allow user
+// to pass a prop in anymore.
+// Counter.defaultProps = {
+//   count: 0
+// }
 
 ReactDOM.render(<Counter />, document.getElementById('app'));
