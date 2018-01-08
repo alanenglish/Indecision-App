@@ -13,6 +13,6 @@ const Option = (props) => {
       </button>
     </div>
   );
-}
+};
 
 export default Option;
