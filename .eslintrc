@@ -1,8 +1,12 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 6
   },
+  "plugins": [
+    "class-property"
+  ],
   "env": {
     "node": true,
     "browser": true,
@@ -11,6 +15,7 @@
   "rules": {
     "comma-dangle": ["error", "never"],
     "no-unused-vars": ["error", { "vars": "local", "args": "none" }],
+    "arrow-parens": ["error", "always"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }
